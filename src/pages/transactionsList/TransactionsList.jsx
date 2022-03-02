@@ -21,25 +21,52 @@ export default function ProductList() {
     }, [dispatch, state])
 
     const columns = [
-        { field: "id", headerName: "ID", width: 220 },
+        { field: "id", headerName: "Nº Transaction", width: 220 },
         {
-            field: "product",
-            headerName: "Product",
+            field: "productId",
+            headerName: "Nº Product",
             width: 200,
+        },
+        {
+            field: "card",
+            headerName: "Card",
+            width: 120,
             renderCell: (params) => {
                 return (
                     <div className="productListItem">
-                        {params.row.title}
+                        {params.row.method.card.network}
                     </div>
                 );
             },
         },
-        { field: "price", headerName: "Price", width: 220 },
-        { field: "owner", headerName: "idUser", width: 220 },
         {
-            field: "disabled",
-            headerName: "Disabled",
+            field: "type",
+            headerName: "Type",
+            width: 120,
+            renderCell: (params) => {
+                return (
+                    <div className="productListItem">
+                        {params.row.method.card.funding}
+                    </div>
+                );
+            },
+        },
+        {
+            field: "amount",
+            headerName: "Amount",
             width: 160,
+        },
+        {
+            field: "ticket",
+            headerName: "Ticket",
+            width: 120,
+            renderCell: (params) => {
+                return (
+                    <div className="productListItem">
+                        <a href={params.row.receipt}>URL</a>
+                    </div>
+                );
+            },
         },
         {
             field: "action",

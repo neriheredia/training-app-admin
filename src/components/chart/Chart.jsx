@@ -21,7 +21,6 @@ export default function Chart({ title, dataKey, grid, type }) {
     let height = Math.max(...Object.values(stats))
     let width = Object.keys(stats).length
 
-    console.log(stats)
 
     let data = []
     for (let [key, value] of Object.entries(stats)) {

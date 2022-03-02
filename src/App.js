@@ -9,9 +9,6 @@ import NewUser from "./pages/newUser/NewUser";
 import ServicesList from "./pages/servicesList/ServicesList";
 import TransactionsList from './pages/transactionsList/TransactionsList'
 import AllUsersGraph from "./pages/analytics/AllUsers";
-import NutritionistsGraph from "./pages/analytics/Nutritionists";
-import TrainersGraph from "./pages/analytics/Trainers";
-import TransactionsGraph from "./pages/analytics/Transactions";
 // import Product from "./pages/product/Product";
 // import NewProduct from "./pages/newProduct/NewProduct";
 import Login from "./pages/login/Login";
@@ -51,17 +48,8 @@ function App() {
                             <Route path="/transactions">
                                 <TransactionsList />
                             </Route>
-                            <Route path="/analytics/transactions">
-                                <TransactionsGraph />
-                            </Route>
-                            <Route path="/analytics/allUsers">
+                            <Route path="/analytics">
                                 <AllUsersGraph />
-                            </Route>
-                            <Route path="/analytics/trainers">
-                                <TrainersGraph />
-                            </Route>
-                            <Route path="/analytics/nutritionists">
-                                <NutritionistsGraph />
                             </Route>
                             {/* <Route path="/product/:productId">
                                 <Product />

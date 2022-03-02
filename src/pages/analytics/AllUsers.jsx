@@ -1,14 +1,30 @@
 import Chart from "../../components/chart/Chart";
 import "./analytics.css";
-import ModularUserList from "../../components/modularUserList/modularUserList"
 
 
 export default function AllUsersGraph() {
-
     return (
         <div className="analytics">
-            <Chart title="Total Users" grid dataKey="Active Users" type={'users'} />
-            <ModularUserList type='user'/>
+            <Chart
+                title="Total Users"
+                grid dataKey="Active Users"
+                type={'users'}
+            />
+            <Chart
+                title="Total Trainers"
+                grid dataKey="Active Users"
+                type={'trainers'}
+            />
+            <Chart
+                title="Total Nutritionists"
+                grid dataKey="Active Users"
+                type={'transactions'}
+            />
+            <Chart
+                title="Total Transactions"
+                grid dataKey="Active Users"
+                type={'transactions'}
+            />
         </div>
     );
 }

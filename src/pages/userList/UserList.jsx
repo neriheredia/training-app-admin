@@ -25,10 +25,10 @@ export default function UserList() {
     console.log(users);
     // const handleDelete = (id) => {
     //     setLoading(true)
-    // deleteUsers(id, dispatch)
-    //     .then(response => {
-    //         setLoading(false)
-    //     })
+    //     deleteUsers(id, dispatch)
+    //         .then(response => {
+    //             setLoading(false)
+    //         })
     // };
 
     const columns = [
@@ -80,13 +80,13 @@ export default function UserList() {
                         {params.row.disabled
                             ? <Done className="userListAdd"
                                 onClick={() => {
-                                    Disable(params.row.id)
+                                    dispatch(Disable(params.row.id))
                                     setState(true)
                                 }} />
                             : <DeleteOutline
                                 className="userListDelete"
                                 onClick={() => {
-                                    Disable(params.row.id)
+                                    dispatch(Disable(params.row.id))
                                     setState(true)
                                 }}
                             />}

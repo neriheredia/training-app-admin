@@ -29,25 +29,7 @@ export default function Sidebar() {
                         <Link to="/analytics/transactions" className="link">
                             <li className="sidebarListItem ">
                                 <TrendingUp className="sidebarIcon" />
-                                Transactions
-                            </li>
-                        </Link>
-                        <Link to="/analytics/allUsers" className="link">
-                            <li className="sidebarListItem ">
-                                <TrendingUp className="sidebarIcon" />
-                                All Users
-                            </li>
-                        </Link>
-                        <Link to="/analytics/trainers" className="link">
-                            <li className="sidebarListItem ">
-                                <TrendingUp className="sidebarIcon" />
-                                Personal Trainers
-                            </li>
-                        </Link>
-                        <Link to="/analytics/nutritionists" className="link">
-                            <li className="sidebarListItem ">
-                                <TrendingUp className="sidebarIcon" />
-                                Nutritionists
+                                Alls Analytics
                             </li>
                         </Link>
                     </ul>
@@ -67,16 +49,21 @@ export default function Sidebar() {
                                 Add User
                             </li>
                         </Link>
-
                     </ul>
                 </div>
                 <div className="sidebarMenu">
-                    <h3 className="sidebarTitle">Services Menu</h3>
+                    <h3 className="sidebarTitle">Menu</h3>
                     <ul className="sidebarList">
                         <Link to="/services" className="link" >
                             <li className="sidebarListItem">
                                 <Assignment className="sidebarIcon" />
                                 Services
+                            </li>
+                        </Link>
+                        <Link to="/transactions" className="link" >
+                            <li className="sidebarListItem">
+                                <Assignment className="sidebarIcon" />
+                                Transactions
                             </li>
                         </Link>
                         {/* <Link to="/newproduct" className="link" >

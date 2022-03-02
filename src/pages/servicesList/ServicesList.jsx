@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { getAllServices } from '../../redux/apiCalls/servicesCalls/getServices'
+import { Disable } from '../../redux/apiCalls/disableCall/disableCall'
 
 export default function ProductList() {
     const dispatch = useDispatch()
@@ -51,7 +52,9 @@ export default function ProductList() {
                 return (
                     <>
                         <Link to={"/product/" + params.row.id}>
-                            <button className="productListEdit">Disabled</button>
+                            <button className="productListEdit" onClick={()=>{
+                                Disable(params.row.id)
+                            }}>Disabled</button>
                         </Link>
                         {/* <DeleteOutline
                             className="productListDelete"

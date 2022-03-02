@@ -1,8 +1,12 @@
 .home{
     flex: 4;
+    height: 90%;
+    overflow: hidden;
 }
 
 .homeWidgets{
     display: flex;
     margin: 20px;
+    height: 100%;
+    overflow: hidden;
 }

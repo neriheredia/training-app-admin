@@ -25,7 +25,7 @@ export default function Topbar() {
                     <span className="logo">TRAINING APP</span>
                 </div>
                 <div className="topRight">
-                    <img src={user.profilePic || "https://crowd-literature.eu/wp-content/uploads/2015/01/no-avatar.gif"} alt="" className="topAvatar" />
+                    <img src={"https://crowd-literature.eu/wp-content/uploads/2015/01/no-avatar.gif"} alt="" className="topAvatar" />
                     <div className="profile">
                         <div className="options">
                             <span>Settings</span>

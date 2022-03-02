@@ -3,7 +3,7 @@ import "./newProduct.css";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import app from "../../firebase";
 import { useDispatch } from "react-redux";
-import { addProduct } from "../../redux/apiCalls";
+// import { addProduct } from "../../redux/apiCalls";
 import { useHistory } from "react-router-dom";
 
 export default function NewProduct() {

@@ -7,7 +7,7 @@ import {
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory, useLocation } from "react-router-dom";
-import { updateUser } from "../../redux/apiCalls";
+// import { updateUser } from "../../redux/apiCalls";
 import "./user.css";
 
 export default function User() {
@@ -19,29 +19,28 @@ export default function User() {
     const history = useHistory()
     const location = useLocation()
     const userId = location.pathname.split('/')[2]
-    const user = useSelector(state => state.users.users.filter(u => u._id === userId))
+    const user = useSelector(state => state.users.users.filter(u => u.id === userId))
     const dispatch = useDispatch()
 
-    console.log(user[0]._id);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-        let newUser = {
-            id: user[0]._id,
-            username,
-            email,
-            password,
-            isAdmin: box
-        }
-        try {
-            updateUser(dispatch, newUser.id, newUser)
-                .then(response => {
-                    history.push('/users')
-                })
-        } catch (err) {
-            console.log(err);
-        }
-    }
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault()
+    //     let newUser = {
+    //         id: user[0].id,
+    //         username,
+    //         email,
+    //         password,
+    //         isAdmin: box
+    //     }
+    //     try {
+    //         updateUser(dispatch, newUser.id, newUser)
+    //             .then(response => {
+    //                 history.push('/users')
+    //             })
+    //     } catch (err) {
+    //         console.log(err);
+    //     }
+    // }
 
     return (
         <div className="user">
@@ -55,7 +54,7 @@ export default function User() {
                 <div className="userShow">
                     <div className="userShowTop">
                         <img
-                            src={user[0].img || "https://crowd-literature.eu/wp-content/uploads/2015/01/no-avatar.gif"}
+                            src={user[0].profile_img || "https://crowd-literature.eu/wp-content/uploads/2015/01/no-avatar.gif"}
                             alt=""
                             className="userShowImg"
                         />
@@ -87,7 +86,7 @@ export default function User() {
                 </div>
                 <div className="userUpdate">
                     <span className="userUpdateTitle">Edit</span>
-                    <form className="userUpdateForm" onSubmit={handleSubmit}>
+                    <form className="userUpdateForm" >
                         <div className="userUpdateLeft">
                             <div className="userUpdateItem">
                                 <label>Username</label>

@@ -1,27 +1,29 @@
-import "./productList.css";
+import "./servicesList.css";
 import { DataGrid } from "@material-ui/data-grid";
-import { DeleteOutline } from "@material-ui/icons";
+// import { DeleteOutline } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
-import { deleteProduct, getProducts } from "../../redux/apiCalls";
+// import { deleteProduct } from "../../redux/apiCalls";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { getAllServices } from '../../redux/apiCalls/servicesCalls/getServices'
 
 export default function ProductList() {
     const dispatch = useDispatch()
-    const products = useSelector(state => state.product.products)
+    const services = useSelector(state => state.services.services)
 
+    console.log(services)
 
     useEffect(() => {
-        getProducts(dispatch)
+        getAllServices(dispatch)
     }, [dispatch])
 
-    const handleDelete = (id) => {
-        deleteProduct(id, dispatch)
-    };
+    // const handleDelete = (id) => {
+    //     deleteProduct(id, dispatch)
+    // };
 
     const columns = [
-        { field: "_id", headerName: "ID", width: 220 },
+        { field: "id", headerName: "ID", width: 220 },
         {
             field: "product",
             headerName: "Product",
@@ -29,17 +31,16 @@ export default function ProductList() {
             renderCell: (params) => {
                 return (
                     <div className="productListItem">
-                        <img className="productListImg" src={params.row.img} alt="" />
                         {params.row.title}
                     </div>
                 );
             },
         },
-        { field: "cuantity", headerName: "Quantity", width: 220 },
-        { field: "inStock", headerName: "Stock", width: 220 },
+        { field: "price", headerName: "Price", width: 220 },
+        { field: "owner", headerName: "idUser", width: 220 },
         {
-            field: "price",
-            headerName: "Price",
+            field: "disabled",
+            headerName: "Disabled",
             width: 160,
         },
         {
@@ -49,13 +50,13 @@ export default function ProductList() {
             renderCell: (params) => {
                 return (
                     <>
-                        <Link to={"/product/" + params.row._id}>
-                            <button className="productListEdit">Edit</button>
+                        <Link to={"/product/" + params.row.id}>
+                            <button className="productListEdit">Disabled</button>
                         </Link>
-                        <DeleteOutline
+                        {/* <DeleteOutline
                             className="productListDelete"
-                            onClick={() => handleDelete(params.row._id)}
-                        />
+                            onClick={() => handleDelete(params.row.id)}
+                        /> */}
                     </>
                 );
             },
@@ -65,11 +66,11 @@ export default function ProductList() {
     return (
         <div className="productList">
             <DataGrid
-                rows={products}
+                rows={services}
                 disableSelectionOnClick
                 columns={columns}
-                getRowId={row => row._id}
-                pageSize={8}
+                getRowId={row => row.id}
+                pageSize={10}
                 checkboxSelection
             />
         </div>

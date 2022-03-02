@@ -41,20 +41,20 @@ export default function Sidebar() {
                     </ul>
                 </div>
                 <div className="sidebarMenu">
-                    <h3 className="sidebarTitle">Products Menu</h3>
+                    <h3 className="sidebarTitle">Services Menu</h3>
                     <ul className="sidebarList">
-                        <Link to="/products" className="link" >
+                        <Link to="/services" className="link" >
                             <li className="sidebarListItem">
                                 <Assignment className="sidebarIcon" />
-                                Products
+                                Services
                             </li>
                         </Link>
-                        <Link to="/newproduct" className="link" >
+                        {/* <Link to="/newproduct" className="link" >
                             <li className="sidebarListItem">
                                 <Add className="sidebarIcon" />
-                                Add Product
+                                
                             </li>
-                        </Link>
+                        </Link> */}
                     </ul>
                 </div>
             </div>

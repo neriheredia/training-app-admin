@@ -1,26 +1,44 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { login } from '../../redux/apiCalls'
+import { loginUser } from '../../redux/apiCalls/userLoginCall/userLoginCall'
+import { useField } from '../../hooks/useField/useField'
 
 const Login = () => {
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
+    const username = useField({ type: 'text' })
+    const password = useField({ type: 'text' })
+    const [user, setUser] = useState({})
+
     const dispatch = useDispatch()
     const history = useHistory()
+
+    useEffect(() => {
+        setUser(prev => {
+            return {
+                ...prev,
+                username: username.value,
+                password: password.value
+            }
+        })
+    }, [username.value, password.value])
 
 
     const handleClick = (e) => {
         e.preventDefault()
-        login(dispatch, { username, password })
-        // window.location.href('/')
+        loginUser(dispatch, user)
         history.push('/')
     }
 
     return (
         <div style={{ height: "100vh", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column" }}>
-            <input style={{ padding: "10px", marginBottom: "20px" }} type="text" placeholder='username' onChange={e => setUsername(e.target.value)} />
-            <input style={{ padding: "10px", marginBottom: "20px" }} type="password" placeholder='password' onChange={e => setPassword(e.target.value)} />
+            <input style={{ padding: "10px", marginBottom: "20px" }}
+                {...username}
+                placeholder='username'
+            />
+            <input style={{ padding: "10px", marginBottom: "20px" }}
+                {...password}
+                placeholder='password'
+            />
             <button style={{ padding: "10px", width: 100 }} onClick={handleClick}>Login</button>
         </div>
     )

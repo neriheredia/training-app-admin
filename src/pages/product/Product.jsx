@@ -7,7 +7,7 @@ import { Publish } from "@material-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useMemo, useState } from "react";
 import { userRequest } from "../../requestMethods";
-import { updateProduct } from "../../redux/apiCalls";
+// import { updateProduct } from "../../redux/apiCalls";
 
 export default function Product() {
     const dispatch = useDispatch()
@@ -98,7 +98,7 @@ export default function Product() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        updateProduct(dispatch, productUpdate.id, productUpdate).then(response => history.push("/products"))
+        // updateProduct(dispatch, productUpdate.id, productUpdate).then(response => history.push("/products"))
     }
     console.log(imgUpdate);
 
@@ -119,25 +119,25 @@ export default function Product() {
         ], []
     )
 
-    useEffect(() => {
-        const getStats = async () => {
-            try {
-                const res = await userRequest.get('orders/income?pid=' + productId)
-                const list = res.data.sort((a, b) => {
-                    return a._id - b._id
-                })
-                list.map((item) =>
-                    setPStats((prev) => [
-                        ...prev,
-                        { name: MONTHS[item._id - 1], Sales: item.total }
-                    ])
-                )
-            } catch (err) {
-                console.log(err);
-            }
-        }
-        getStats()
-    }, [MONTHS])
+    // useEffect(() => {
+    //     const getStats = async () => {
+    //         try {
+    //             const res = await userRequest.get('orders/income?pid=' + productId)
+    //             const list = res.data.sort((a, b) => {
+    //                 return a._id - b._id
+    //             })
+    //             list.map((item) =>
+    //                 setPStats((prev) => [
+    //                     ...prev,
+    //                     { name: MONTHS[item._id - 1], Sales: item.total }
+    //                 ])
+    //             )
+    //         } catch (err) {
+    //             console.log(err);
+    //         }
+    //     }
+    //     getStats()
+    // }, [MONTHS])
 
     return (
         <div className="product">

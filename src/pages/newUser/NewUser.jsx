@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { publicRequest } from '../../requestMethods';
+// import { publicRequest } from '../../requestMethods';
 import { useHistory } from 'react-router-dom'
 import "./newUser.css";
 
@@ -11,27 +11,27 @@ export default function NewUser() {
     const [box, setBox] = useState(false)
     const [error, setError] = useState(false);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setError(false);
-        try {
-            const res = await publicRequest.post("auth/register", {
-                username,
-                email,
-                password,
-                isAdmin: box
-            });
-            res.data && history.push("/users");
-        } catch (err) {
-            setError(true);
-        }
-    };
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+    //     setError(false);
+    //     try {
+    //         const res = await publicRequest.post("auth/register", {
+    //             username,
+    //             email,
+    //             password,
+    //             isAdmin: box
+    //         });
+    //         res.data && history.push("/users");
+    //     } catch (err) {
+    //         setError(true);
+    //     }
+    // };
 
 
     return (
         <div className="newUser">
             <h1 className="newUserTitle">New User</h1>
-            <form className="newUserForm" onSubmit={handleSubmit}>
+            <form className="newUserForm" >
                 <div className="newUserItem">
                     <label>Username</label>
                     <input

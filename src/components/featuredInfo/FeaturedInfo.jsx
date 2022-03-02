@@ -1,7 +1,7 @@
 import "./featuredInfo.css";
 import { ArrowDownward, ArrowUpward } from "@material-ui/icons";
 import { useEffect, useState } from "react";
-import { userRequest } from "../../requestMethods";
+// import { userRequest } from "../../requestMethods";
 
 export default function FeaturedInfo() {
 

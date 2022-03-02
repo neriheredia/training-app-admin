@@ -4,6 +4,7 @@ import {
     Assignment,
     LineStyle,
     PermIdentity,
+    TrendingUp
 } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 
@@ -18,6 +19,12 @@ export default function Sidebar() {
                             <li className="sidebarListItem active">
                                 <LineStyle className="sidebarIcon" />
                                 Home
+                            </li>
+                        </Link>
+                        <Link to="/analytics" className="link">
+                            <li className="sidebarListItem active">
+                                <TrendingUp className="sidebarIcon" />
+                                Analytics
                             </li>
                         </Link>
                     </ul>

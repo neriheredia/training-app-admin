@@ -2,7 +2,7 @@ import "./servicesList.css";
 import { DataGrid } from "@material-ui/data-grid";
 // import { DeleteOutline } from "@material-ui/icons";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 // import { deleteProduct } from "../../redux/apiCalls";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
@@ -13,15 +13,11 @@ export default function ProductList() {
     const dispatch = useDispatch()
     const services = useSelector(state => state.services.services)
 
-    console.log(services)
+    const [state, setState] = useState(false)
 
     useEffect(() => {
         getAllServices(dispatch)
-    }, [dispatch])
-
-    // const handleDelete = (id) => {
-    //     deleteProduct(id, dispatch)
-    // };
+    }, [dispatch, state])
 
     const columns = [
         { field: "id", headerName: "ID", width: 220 },
@@ -50,17 +46,10 @@ export default function ProductList() {
             width: 150,
             renderCell: (params) => {
                 return (
-                    <>
-                        <Link to={"/product/" + params.row.id}>
                             <button className="productListEdit" onClick={()=>{
                                 Disable(params.row.id)
+                                setState(!state)
                             }}>Disabled</button>
-                        </Link>
-                        {/* <DeleteOutline
-                            className="productListDelete"
-                            onClick={() => handleDelete(params.row.id)}
-                        /> */}
-                    </>
                 );
             },
         },

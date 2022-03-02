@@ -26,7 +26,7 @@ export default function Chart({ title, dataKey, grid }) {
     }
 
     useEffect(()=>{
-        getMonthlyStats(dispatch)
+        getMonthlyStats(dispatch, 'users')
     },[dispatch])
 
     return (

@@ -7,10 +7,10 @@ import { useDispatch, useSelector } from 'react-redux'
 export default function WidgetSm() {
     const dispatch = useDispatch()
     const users = useSelector(state => state.users.users)
-
+    const token = useSelector(state => state.user.currentUser.accessToken)
 
     useEffect(() => {
-        getAllUsers(dispatch)
+        getAllUsers(dispatch, token)
     }, [])
 
     return (

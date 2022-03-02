@@ -11,10 +11,11 @@ import { Disable } from '../../redux/apiCalls/disableCall/disableCall'
 export default function UserList() {
     const dispatch = useDispatch()
     const users = useSelector(state => state.users.users)
+    const token = useSelector(state => state.user.currentUser.accessToken)
     const [loading, setLoading] = useState(false)
     const [state, setState] = useState(false)
     useEffect(() => {
-        getAllUsers(dispatch)
+        getAllUsers(dispatch, token)
             .then(response => {
                 //setLoading(false)
                 setState(false)
@@ -77,19 +78,19 @@ export default function UserList() {
                             <button className="userListEdit">Edit</button>
                         </Link>
                         {params.row.disabled
-                            ?<Done className="userListAdd"
-                            onClick={() => {
-                                Disable(params.row.id)
-                                setState(true)
-                            }}/>
-                            :<DeleteOutline
-                            className="userListDelete"
-                            onClick={() => {
-                                Disable(params.row.id)
-                                setState(true)
-                            }}
-                        />}
-                        
+                            ? <Done className="userListAdd"
+                                onClick={() => {
+                                    Disable(params.row.id)
+                                    setState(true)
+                                }} />
+                            : <DeleteOutline
+                                className="userListDelete"
+                                onClick={() => {
+                                    Disable(params.row.id)
+                                    setState(true)
+                                }}
+                            />}
+
                     </>
                 );
             },

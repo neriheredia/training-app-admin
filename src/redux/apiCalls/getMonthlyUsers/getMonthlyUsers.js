@@ -3,14 +3,18 @@ import {
     getMonthlyStatsSuccess,
     getMonthlyStatsFailure
 } from "../../reducers/monthlyReducer"
-import { privateRequest } from '../../../config/requestMethod/privateRequest'
+import { baseUrlDev } from '../../../config/requestMethod/publicRequest'
 
 
 //GET MONTHLY STATS
-export const getMonthlyStats = async (dispatch, type) => {
+export const getMonthlyStats = async (dispatch, type, token) => {
     dispatch(getMonthlyStatsStart())
     try {
-        const res = await privateRequest.get(`admin/stats/${type}`)
+        const res = await baseUrlDev.get(`admin/stats/${type}`, {
+            headers: {
+                token: token
+            }
+        })
         dispatch(getMonthlyStatsSuccess(res.data))
     } catch (err) {
         dispatch(getMonthlyStatsFailure())

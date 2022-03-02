@@ -3,14 +3,18 @@ import {
     getTransactionSuccess,
     getTransactionFailure,
 } from "../../reducers/transactionReducer"
-import { privateRequest } from '../../../config/requestMethod/privateRequest'
+import { baseUrlDev } from '../../../config/requestMethod/publicRequest'
 
 
 //GET USERS
-export const getAllTransactions = async (dispatch) => {
+export const getAllTransactions = async (dispatch, accessToken) => {
     dispatch(getTransactionStart())
     try {
-        const res = await privateRequest.get('admin/orders')
+        const res = await baseUrlDev.get('admin/orders', {
+            headers: {
+                token: `${accessToken}`
+            }
+        })
         dispatch(getTransactionSuccess(res.data))
     } catch (err) {
         dispatch(getTransactionFailure())

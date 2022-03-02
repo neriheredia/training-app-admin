@@ -3,13 +3,17 @@ import {
     getAllServicesSuccess,
     getAllServicesFailure,
 } from '../../reducers/servicesReducer'
-import { privateRequest } from '../../../config/requestMethod/privateRequest'
+import { baseUrlDev } from '../../../config/requestMethod/publicRequest'
 
 //GET ALL SERVICES
-export const getAllServices = async (dispatch) => {
+export const getAllServices = async (dispatch, token) => {
     dispatch(getAllServicesStart())
     try {
-        const res = await privateRequest.get('admin/products')
+        const res = await baseUrlDev.get('admin/products', {
+            headers: {
+                token: token
+            }
+        })
         dispatch(getAllServicesSuccess(res.data))
     } catch (err) {
         dispatch(getAllServicesFailure())

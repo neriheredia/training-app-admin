@@ -3,14 +3,18 @@ import {
     getUsersSuccess,
     getUsersFailure
 } from "../../reducers/userReducer"
-import { privateRequest } from '../../../config/requestMethod/privateRequest'
+import { baseUrlDev } from '../../../config/requestMethod/publicRequest'
 
 
 //GET USERS
-export const getAllUsers = async (dispatch) => {
+export const getAllUsers = async (dispatch, token) => {
     dispatch(getUsersStart())
     try {
-        const res = await privateRequest.get('admin/users')
+        const res = await baseUrlDev.get('admin/users', {
+            headers: {
+                token: token
+            }
+        })
         dispatch(getUsersSuccess(res.data))
     } catch (err) {
         dispatch(getUsersFailure())

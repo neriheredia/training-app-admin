@@ -19,8 +19,8 @@ function App() {
     return (
         <Router>
             <Switch>
-                {user ? (
-                    <Route path="/login">
+                {!user ? (
+                    <Route path="/">
                         <Login />
                     </Route>
                 ) : (

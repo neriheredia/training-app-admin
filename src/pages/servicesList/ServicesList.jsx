@@ -12,11 +12,12 @@ import { Disable } from '../../redux/apiCalls/disableCall/disableCall'
 export default function ProductList() {
     const dispatch = useDispatch()
     const services = useSelector(state => state.services.services)
+    const token = useSelector(state => state.user.currentUser.accessToken)
 
     const [state, setState] = useState(false)
 
     useEffect(() => {
-        getAllServices(dispatch)
+        getAllServices(dispatch, token)
     }, [dispatch, state])
 
     const columns = [
@@ -46,10 +47,10 @@ export default function ProductList() {
             width: 150,
             renderCell: (params) => {
                 return (
-                            <button className="productListEdit" onClick={()=>{
-                                Disable(params.row.id)
-                                setState(!state)
-                            }}>Disabled</button>
+                    <button className="productListEdit" onClick={() => {
+                        Disable(params.row.id)
+                        setState(!state)
+                    }}>Disabled</button>
                 );
             },
         },

@@ -8,9 +8,10 @@ import { getAllTransactions } from "../../redux/apiCalls/transactionCalls/getTra
 export default function WidgetLg() {
     const dispatch = useDispatch()
     const transactions = useSelector(state => state.transaction.transaction)
+    const token = useSelector(state => state.user.currentUser.accessToken)
 
     useEffect(() => {
-        getAllTransactions(dispatch)
+        getAllTransactions(dispatch, token)
     }, [])
 
 

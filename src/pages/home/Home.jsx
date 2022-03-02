@@ -2,7 +2,7 @@ import Chart from "../../components/chart/Chart";
 import "./home.css";
 import WidgetSm from "../../components/widgetSm/WidgetSm";
 import WidgetLg from "../../components/widgetLg/WidgetLg";
-import {  useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useEffect } from "react";
 
 
@@ -15,7 +15,7 @@ export default function Home() {
     // console.log(TOKEN);
     return (
         <div className="home">
-            <Chart title="User Analytics" grid dataKey="Active users" />
+            <Chart title="User Analytics" grid dataKey="Active users" type={'users'} />
             <div className="homeWidgets">
                 <WidgetSm />
                 <WidgetLg />

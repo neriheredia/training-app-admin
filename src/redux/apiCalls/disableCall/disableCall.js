@@ -1,7 +1,7 @@
-import { privateRequest } from '../../../config/requestMethod/privateRequest'
+import { baseUrlDev } from '../../../config/requestMethod/publicRequest'
 
 
 //DISABLE ANYTHING
 export const Disable = async (id, state) => {
-    await privateRequest.delete(`admin/${id}`)
+    await baseUrlDev.delete(`admin/${id}`)
 }

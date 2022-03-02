@@ -4,6 +4,7 @@ import userLoginReducer from '../reducers/userLoginReducer';
 import transactionReducer from '../reducers/transactionReducer';
 import userReducer from '../reducers/userReducer'
 import servicesReducer from '../reducers/servicesReducer'
+import monthlyReducer from '../reducers/monthlyReducer';
 import {
     persistStore,
     persistReducer,
@@ -23,6 +24,7 @@ const persistConfig = {
 }
 
 const rootReducer = combineReducers({
+    monthlyStats: monthlyReducer,
     user: userLoginReducer,
     users: userReducer,
     services: servicesReducer,

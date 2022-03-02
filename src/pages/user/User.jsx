@@ -1,46 +1,122 @@
 import {
     CalendarToday,
-    LocationSearching,
     MailOutline,
     PermIdentity,
+    Settings,
+    Publish
 } from "@material-ui/icons";
+import { useEffect } from "react";
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage"
+import app from '../../firebase'
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory, useLocation } from "react-router-dom";
-// import { updateUser } from "../../redux/apiCalls";
+import { updateUser } from "../../redux/apiCalls/updateUserCall/updateUserCall";
 import "./user.css";
 
 export default function User() {
-    const [username, setUsername] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [box, setBox] = useState(false)
-    // const [error, setError] = useState(false);
+    const [userForm, setForm] = useState({})
+    const [errors, setErrors] = useState({})
+
+    const [PHImage, setPH] = useState('')
+    const [imgUpdate, setImg] = useState('')
+
     const history = useHistory()
     const location = useLocation()
     const userId = location.pathname.split('/')[2]
     const user = useSelector(state => state.users.users.filter(u => u.id === userId))
+    const adminUser = useSelector(state => state.user.currentUser)
     const dispatch = useDispatch()
 
+    const handleImage = (e) => {
+        e.preventDefault()
+        let preventSubmit=document.getElementById('up')
+        let totalSubmit=document.getElementsByClassName('userUpdateButton')[0]
+        //totalSubmit
+        preventSubmit.disabled='true'
+                preventSubmit.style.opacity=.4
+                preventSubmit.innerText='Uploading...'
+                preventSubmit.style.cursor='progress'
+                document.getElementsByTagName('html')[0].style.cursor='progress'
 
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault()
-    //     let newUser = {
-    //         id: user[0].id,
-    //         username,
-    //         email,
-    //         password,
-    //         isAdmin: box
-    //     }
-    //     try {
-    //         updateUser(dispatch, newUser.id, newUser)
-    //             .then(response => {
-    //                 history.push('/users')
-    //             })
-    //     } catch (err) {
-    //         console.log(err);
-    //     }
-    // }
+        totalSubmit.style.opacity=.7
+        totalSubmit.disabled='true'
+        totalSubmit.innerText='Loading...'
+
+        const fileName = new Date().getTime() + imgUpdate.name
+
+        const storage = getStorage(app)
+ 
+        const storageRef = ref(storage, fileName)
+
+        const uploadTask = uploadBytesResumable(storageRef, imgUpdate);
+
+        uploadTask.on('state_changed',
+            (snapshot) => {
+
+                const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                console.log('Upload is ' + progress + '% done');
+                switch (snapshot.state) {
+                    case 'paused':
+                        console.log('Upload is paused');
+                        break;
+                    case 'running':
+                        console.log('Upload is running');
+                        break;
+                    default:
+                }
+            },
+            (error) => {},
+            () => {
+                getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+
+                    setForm({
+                        ...userForm,
+                        profile_img: imgUpdate?downloadURL:''
+                    })
+                    preventSubmit.style.opacity=1
+                    preventSubmit.innerText='Uploaded'
+                    document.getElementsByTagName('html')[0].style.cursor='default'
+
+                    totalSubmit.style.opacity=1
+                    totalSubmit.innerText='Update'
+                    document.getElementsByClassName('userUpdateButton')[0].disabled=false
+
+                });
+            })
+    }
+
+    function handleChange(e){
+        e.preventDefault()
+
+        let field = e.target.name
+
+        if(field==='password'&&!/(?=.*\d).{8,}$/.test(e.target.name)) 
+            setErrors({...errors, password:"Password must contain at least8 characters and 1 number"})
+
+        if(field==='username'&&field.length<5)
+            setErrors({...errors, username:"Username must contain at least 5 characters"})
+
+        if(field==='email'&&!/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(field))
+            setErrors({...errors, email:"Please enter a valid email"})
+
+        if(field==='profile_img'&&!/https?:\/\/.+\.(a?png|gif|p?jpe?g|jfif|pjp|webp|pdf|svg|avif|jxl|bmp|ico|cur|tiff?)$/i.test(field))
+            setErrors({...errors, profile_img:"The file must be an image"})
+
+        setForm({
+            ...userForm,
+            [field]:e.target.value
+        })
+    }
+
+    function handleSubmit(e){
+        e.preventDefault()
+        updateUser(dispatch, adminUser.accessToken, userId, userForm)
+    }
+
+    useEffect(()=>{
+        console.log(userForm)
+    },[userForm, PHImage])
 
     return (
         <div className="user">
@@ -71,7 +147,7 @@ export default function User() {
                         </div>
                         <div className="userShowInfo">
                             <CalendarToday className="userShowIcon" />
-                            <span className="userShowInfoTitle">{user[0].createdAt}</span>
+                            <span className="userShowInfoTitle">{user[0].createdAt.split('T').join(' | ')}</span>
                         </div>
                         <span className="userShowTitle">{user.isAdmin}</span>
                         <div className="userShowInfo">
@@ -79,11 +155,12 @@ export default function User() {
                             <span className="userShowInfoTitle">{user[0].email}</span>
                         </div>
                         <div className="userShowInfo">
-                            <LocationSearching className="userShowIcon" />
-                            <span className="userShowInfoTitle">{user[0].isAdmin === false ? 'NO' : 'YES'}</span>
+                            <Settings className="userShowIcon" />
+                            <span className="userShowInfoTitle">{user[0].is_admin ? 'Admin' : 'User'}</span>
                         </div>
                     </div>
                 </div>
+
                 <div className="userUpdate">
                     <span className="userUpdateTitle">Edit</span>
                     <form className="userUpdateForm" >
@@ -92,51 +169,105 @@ export default function User() {
                                 <label>Username</label>
                                 <input
                                     type="text"
+                                    name='username'
                                     placeholder={user[0].username}
                                     className="userUpdateInput"
-                                    onChange={(e) => setUsername(e.target.value)}
+                                    onChange={handleChange}
                                 />
                             </div>
                             <div className="userUpdateItem">
                                 <label>Password </label>
                                 <input
                                     type="password"
-                                    placeholder="Passwrod..."
+                                    name='password'
+                                    placeholder="*****"
                                     className="userUpdateInput"
-                                    onChange={(e) => setPassword(e.target.value)}
+                                    onChange={handleChange}
                                 />
                             </div>
                             <div className="userUpdateItem">
                                 <label>Email</label>
                                 <input
                                     type="text"
+                                    name='email'
                                     placeholder={user[0].email}
                                     className="userUpdateInput"
-                                    onChange={(e) => setEmail(e.target.value)}
+                                    onChange={handleChange}
                                 />
                             </div>
                             <div className="userUpdateBox">
                                 <label>isAdmin</label>
                                 <input
                                     type="checkbox"
+                                    name='is_admin'
                                     className="userUpdateBox"
-                                    onChange={() => setBox(true)}
+                                    onChange={handleChange}
                                 />
                             </div>
                         </div>
                         <div className="userUpdateRight">
-                            {/* <div className="userUpdateUpload">
+                            <div className="userUpdateUpload">
                                 <img
                                     className="userUpdateImg"
-                                    src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-                                    alt=""
+                                    //src={imgUpdate || user.profile_img || "https://crowd-literature.eu/wp-content/uploads/2015/01/no-avatar.gif"}
+                                    src={PHImage || "https://crowd-literature.eu/wp-content/uploads/2015/01/no-avatar.gif"}
+                                    alt="User's profile"
                                 />
                                 <label htmlFor="file">
                                     <Publish className="userUpdateIcon" />
                                 </label>
-                                <input type="file" id="file" style={{ display: "none" }} />
-                            </div> */}
-                            <button className="userUpdateButton">Update</button>
+                                <input type="file" id="file" name='profile_img' style={{ display: "none" }} onChange={(event) => {
+                                setImg(event.target.files[0])
+                                
+                                if (!event.target.files[0]) return
+                                if (event.target.files[0]?.type.includes('image')) {
+                                    if (event.target.files[0]?.size >= 1000000) return alert('Max file size: 1MB')
+                                    
+                                    var fileReader = new FileReader();
+                                    fileReader.onload = function (fileLoadedEvent) {
+                                        fileReader.onloadend = () => {
+                                            setPH(fileReader.result)
+                                            document.getElementById('up').disabled=false
+                                            document.getElementById('up').innerText='Upload'
+                                        }
+                                    }
+                                    fileReader.readAsDataURL(event.target.files[0])
+                                }
+
+
+                                let input = document.createElement('button')
+                                input.innerText = 'Remove'
+                                input.setAttribute('id', 'erase')
+                                input.setAttribute('type', 'button')
+                                input.addEventListener('click', () => {
+                                    document.getElementById('up').disabled=false
+                                    setImg('')
+                                    setPH('')
+                                    document.getElementById('options').removeChild(input)
+                                    setForm({
+                                        ...userForm,
+                                        profile_img: ''
+                                    })
+                                    event.target.value = ''
+                                    return
+                                })
+
+                                if (!imgUpdate) {
+                                    document.getElementById('options').append(input)
+                                }
+                            }}/>
+                            </div >
+                            <div id='options'>
+                            {imgUpdate
+                                ? <button type='button' id='up' onClick={(event) => { 
+                                    handleImage(event)
+                                    document.getElementById('up').disabled=true
+                                        }}>
+                                    Upload
+                                </button>
+                                : null}
+                            </div>
+                            <button className="userUpdateButton" onClick={handleSubmit}>Update</button>
                         </div>
                     </form>
                 </div>

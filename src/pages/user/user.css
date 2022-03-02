@@ -168,3 +168,37 @@
   margin-right: 80px;
   margin-bottom: 20px;
 }
+
+#options{
+  display: flex;
+  gap:10px;
+}
+
+#up,#erase{
+  color: white;
+	border: hidden;
+	border-radius: 5px;
+	padding: 5px 15px;
+	text-decoration: none;
+	font-weight: 600;
+	transition: .3s;
+	box-sizing: content-box;
+	text-align: center;
+	cursor: pointer;
+}
+
+#up{
+  background-color: rgb(46, 70, 148)
+}
+
+#up:hover{
+  background-color: rgb(87, 110, 182);
+}
+
+#erase{
+  background-color: rgb(156, 33, 33);
+}
+
+#erase:hover{
+  background-color: rgb(185, 66, 66);
+}

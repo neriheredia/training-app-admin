@@ -1,6 +1,15 @@
 .container{
     display: flex;
     margin-top: 10px;
+    overflow:hidden;
+}
+
+html, body{
+    height: 100%;
+}
+
+#root{
+    height: 100%;
 }
 
 

@@ -29,6 +29,11 @@
   color: red;
   cursor: pointer;
 }
+
+.userListAdd {
+  color: rgb(34, 158, 72);
+  cursor: pointer;
+}
 .contentLoading {
   height: 100vh;
   display: flex;

@@ -1,22 +1,25 @@
 import "./userList.css";
 import { DataGrid } from "@material-ui/data-grid";
-import { DeleteOutline } from "@material-ui/icons";
+import { DeleteOutline, Done } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "../../components/loading/Loading";
 import { getAllUsers } from '../../redux/apiCalls/usersCalls/getUsersAll'
+import { Disable } from '../../redux/apiCalls/disableCall/disableCall'
 
 export default function UserList() {
     const dispatch = useDispatch()
     const users = useSelector(state => state.users.users)
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(false)
+    const [state, setState] = useState(false)
     useEffect(() => {
         getAllUsers(dispatch)
             .then(response => {
-                setLoading(false)
+                //setLoading(false)
+                setState(false)
             })
-    }, [dispatch])
+    }, [dispatch, loading, state])
 
     console.log(users);
     // const handleDelete = (id) => {
@@ -73,10 +76,20 @@ export default function UserList() {
                         <Link to={"/user/" + params.row.id}>
                             <button className="userListEdit">Edit</button>
                         </Link>
-                        <DeleteOutline
+                        {params.row.disabled
+                            ?<Done className="userListAdd"
+                            onClick={() => {
+                                Disable(params.row.id)
+                                setState(true)
+                            }}/>
+                            :<DeleteOutline
                             className="userListDelete"
-                        // onClick={() => handleDelete(params.row.id)}
-                        />
+                            onClick={() => {
+                                Disable(params.row.id)
+                                setState(true)
+                            }}
+                        />}
+                        
                     </>
                 );
             },

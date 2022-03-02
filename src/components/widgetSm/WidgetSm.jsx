@@ -33,7 +33,7 @@ export default function WidgetSm() {
                             Display
                         </button>
                     </li>
-                ))}
+                )).reverse()}
             </ul>
         </div>
     );

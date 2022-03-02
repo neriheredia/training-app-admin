@@ -15,7 +15,7 @@ import { useSelector } from "react-redux";
 
 function App() {
     // const admin = JSON.parse(JSON.parse(localStorage.getItem('persist:root')).user).currentUser.isAdmin
-    const user = useSelector(state => state.user.currentUser === null)
+    const user = useSelector(state => state.user.currentUser)
     return (
         <Router>
             <Switch>

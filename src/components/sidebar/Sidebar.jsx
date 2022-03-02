@@ -21,10 +21,33 @@ export default function Sidebar() {
                                 Home
                             </li>
                         </Link>
-                        <Link to="/analytics" className="link">
-                            <li className="sidebarListItem active">
+                    </ul>
+                </div>
+                <div className="sidebarMenu">
+                    <h3 className="sidebarTitle">Analytics</h3>
+                    <ul className="sidebarList">
+                        <Link to="/analytics/transactions" className="link">
+                            <li className="sidebarListItem ">
                                 <TrendingUp className="sidebarIcon" />
-                                Analytics
+                                Transactions
+                            </li>
+                        </Link>
+                        <Link to="/analytics/allUsers" className="link">
+                            <li className="sidebarListItem ">
+                                <TrendingUp className="sidebarIcon" />
+                                All Users
+                            </li>
+                        </Link>
+                        <Link to="/analytics/trainers" className="link">
+                            <li className="sidebarListItem ">
+                                <TrendingUp className="sidebarIcon" />
+                                Personal Trainers
+                            </li>
+                        </Link>
+                        <Link to="/analytics/nutritionists" className="link">
+                            <li className="sidebarListItem ">
+                                <TrendingUp className="sidebarIcon" />
+                                Nutritionists
                             </li>
                         </Link>
                     </ul>

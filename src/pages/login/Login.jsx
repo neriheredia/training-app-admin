@@ -6,7 +6,7 @@ import { useField } from '../../hooks/useField/useField'
 
 const Login = () => {
     const username = useField({ type: 'text' })
-    const password = useField({ type: 'text' })
+    const password = useField({ type: 'password' })
     const [user, setUser] = useState({})
 
     const dispatch = useDispatch()

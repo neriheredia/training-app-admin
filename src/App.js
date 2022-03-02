@@ -7,11 +7,15 @@ import UserList from "./pages/userList/UserList";
 import User from "./pages/user/User";
 import NewUser from "./pages/newUser/NewUser";
 import ServicesList from "./pages/servicesList/ServicesList";
+import TransactionsList from './pages/transactionsList/TransactionsList'
+import AllUsersGraph from "./pages/analytics/AllUsers";
+import NutritionistsGraph from "./pages/analytics/Nutritionists";
+import TrainersGraph from "./pages/analytics/Trainers";
+import TransactionsGraph from "./pages/analytics/Transactions";
 // import Product from "./pages/product/Product";
 // import NewProduct from "./pages/newProduct/NewProduct";
 import Login from "./pages/login/Login";
 import { useSelector } from "react-redux";
-import Analytics from "./pages/analytics/Analytics";
 
 
 function App() {
@@ -44,8 +48,20 @@ function App() {
                             <Route path="/services">
                                 <ServicesList />
                             </Route>
-                            <Route path="/analytics">
-                                <Analytics />
+                            <Route path="/transactions">
+                                <TransactionsList />
+                            </Route>
+                            <Route path="/analytics/transactions">
+                                <TransactionsGraph />
+                            </Route>
+                            <Route path="/analytics/allUsers">
+                                <AllUsersGraph />
+                            </Route>
+                            <Route path="/analytics/trainers">
+                                <TrainersGraph />
+                            </Route>
+                            <Route path="/analytics/nutritionists">
+                                <NutritionistsGraph />
                             </Route>
                             {/* <Route path="/product/:productId">
                                 <Product />

@@ -1,19 +1,20 @@
-.container{
-    display: flex;
-    margin-top: 10px;
-    overflow:hidden;
+.container {
+  display: flex;
+  margin-top: 10px;
+  overflow: hidden;
 }
 
-html, body{
-    height: 100%;
+html,
+body {
+  height: 100%;
 }
 
-#root{
-    height: 100%;
+#root {
+  height: 100%;
+  overflow: hidden;
 }
 
-
-.link{
-    text-decoration: none;
-    color: inherit;
+.link {
+  text-decoration: none;
+  color: inherit;
 }

@@ -10,6 +10,19 @@ const transactionSlice = createSlice(
             error: false
         },
         reducers: {
+            //GET ALL USERS
+            getTransactionStart: (state) => {
+                state.isFetching = true
+                state.error = false
+            },
+            getTransactionSuccess: (state, action) => {
+                state.isFetching = false
+                state.transaction = action.payload
+            },
+            getTransactionFailure: (state) => {
+                state.isFetching = false
+                state.error = true
+            },
             //POST TRANSACTION
             postCreateTransactionStart: (state) => {
                 state.isFetching = true
@@ -28,6 +41,9 @@ const transactionSlice = createSlice(
 
 export const
     {
+        getTransactionStart,
+        getTransactionSuccess,
+        getTransactionFailure,
         postCreateTransactionStart,
         postCreateTransactionSuccess,
         postCreateTransactionError

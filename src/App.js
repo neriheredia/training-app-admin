@@ -11,6 +11,7 @@ import ServicesList from "./pages/servicesList/ServicesList";
 // import NewProduct from "./pages/newProduct/NewProduct";
 import Login from "./pages/login/Login";
 import { useSelector } from "react-redux";
+import Analytics from "./pages/analytics/Analytics";
 
 
 function App() {
@@ -42,6 +43,9 @@ function App() {
                             </Route>
                             <Route path="/services">
                                 <ServicesList />
+                            </Route>
+                            <Route path="/analytics">
+                                <Analytics />
                             </Route>
                             {/* <Route path="/product/:productId">
                                 <Product />

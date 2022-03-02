@@ -17,7 +17,7 @@ const monthlyStats = createSlice
                 },
                 getMonthlyStatsSuccess: (state, action) => {
                     state.isFetching = false
-                    state.stats = action.payload
+                    state.stats = [...state.stats, action.payload]
                 },
                 getMonthlyStatsFailure: (state) => {
                     state.isFetching = false

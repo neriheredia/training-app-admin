@@ -90,22 +90,23 @@ export default function User() {
         e.preventDefault()
 
         let field = e.target.name
+        let input = e.target.value
 
-        if(field==='password'&&!/(?=.*\d).{8,}$/.test(e.target.name)) 
+        if(field==='password'&&!/(?=.*\d).{8,}$/.test(input)) 
             setErrors({...errors, password:"Password must contain at least8 characters and 1 number"})
 
-        if(field==='username'&&field.length<5)
+        if(field==='username'&&input.length<5)
             setErrors({...errors, username:"Username must contain at least 5 characters"})
 
-        if(field==='email'&&!/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(field))
+        if(field==='email'&&!/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(input))
             setErrors({...errors, email:"Please enter a valid email"})
 
-        if(field==='profile_img'&&!/https?:\/\/.+\.(a?png|gif|p?jpe?g|jfif|pjp|webp|pdf|svg|avif|jxl|bmp|ico|cur|tiff?)$/i.test(field))
+        if(field==='profile_img'&&!/https?:\/\/.+\.(a?png|gif|p?jpe?g|jfif|pjp|webp|pdf|svg|avif|jxl|bmp|ico|cur|tiff?)$/i.test(input))
             setErrors({...errors, profile_img:"The file must be an image"})
 
         setForm({
             ...userForm,
-            [field]:e.target.value
+            [field]:input
         })
     }
 

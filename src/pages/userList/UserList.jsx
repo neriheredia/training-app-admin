@@ -80,13 +80,13 @@ export default function UserList() {
                         {params.row.disabled
                             ? <Done className="userListAdd"
                                 onClick={() => {
-                                    dispatch(Disable(params.row.id))
+                                    Disable(params.row.id, token)
                                     setState(true)
                                 }} />
                             : <DeleteOutline
                                 className="userListDelete"
                                 onClick={() => {
-                                    dispatch(Disable(params.row.id))
+                                    Disable(params.row.id, token)
                                     setState(true)
                                 }}
                             />}

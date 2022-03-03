@@ -11,18 +11,44 @@ import TransactionsList from './pages/transactionsList/TransactionsList'
 import AllUsersGraph from "./pages/analytics/AllUsers";
 import Login from "./pages/login/Login";
 import { useSelector } from "react-redux";
+import Swal from 'sweetalert2'
+import { useEffect } from "react";
 
 
 function App() {
-    const user = useSelector(state => state.user.currentUser)
+    let user = useSelector(state => state.user.currentUser)
+
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2500,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    })
+
+    useEffect(()=>{
+        if(user?.isAdmin===false){
+            Toast.fire({
+                icon: 'info',
+                title: 'This user isn\'t an admin'
+            })
+        }
+    },[user])
+
+
     return (
         <Router>
             <Switch>
-                {!user ? (
+                {!user||user.isAdmin===false ? (
                     <Route path="/">
                         <Login />
                     </Route>
                 ) : (
+                    user?.isAdmin ?
                     <>
                         <Topbar />
                         <div className="container">
@@ -49,7 +75,7 @@ function App() {
                                 <AllUsersGraph />
                             </Route>
                         </div>
-                    </>
+                    </>:null
                 )}
             </Switch>
         </Router>

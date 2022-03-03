@@ -9,13 +9,18 @@ import {
     ResponsiveContainer,
 } from "recharts";
 import { useEffect } from "react";
-import { getMonthlyStats } from "../../redux/apiCalls/getMonthlyUsers/getMonthlyUsers";
+import { getMonthlyStats } from "../../redux/apiCalls/getMonthlyStats/getMonthlyStats";
 import { useDispatch, useSelector } from 'react-redux'
 
 export default function Chart({ title, dataKey, grid, type }) {
 
     const dispatch = useDispatch()
-    const stats = useSelector(state => state.monthlyStats.stats)
+    const stats = useSelector(state => {
+        if(type==='users') return state.userStats.stats
+        if(type==='trainers') return state.trainerStats.stats
+        if(type==='nutritionists') return state.nutritionistStats.stats
+        return state.transactionStats.stats
+    })
     const token = useSelector(state => state.user.currentUser.accessToken)
 
     let height = Math.max(...Object.values(stats))

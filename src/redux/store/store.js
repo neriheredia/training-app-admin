@@ -5,6 +5,10 @@ import transactionReducer from '../reducers/transactionReducer';
 import userReducer from '../reducers/userReducer'
 import servicesReducer from '../reducers/servicesReducer'
 import monthlyReducer from '../reducers/monthlyReducer';
+import nutritionistStats from '../reducers/nutritionistStats';
+import trainerStats from '../reducers/trainerStats';
+import userStats from '../reducers/userStats';
+import transactionStats from '../reducers/transactionStats';
 import {
     persistStore,
     persistReducer,
@@ -29,7 +33,11 @@ const rootReducer = combineReducers({
     users: userReducer,
     services: servicesReducer,
     transaction: transactionReducer,
-    updateUser: updateUserReducer
+    updateUser: updateUserReducer,
+    nutritionistStats,
+    trainerStats,
+    userStats,
+    transactionStats,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

@@ -29,7 +29,7 @@ export default function Sidebar() {
                         <Link to="/analytics/transactions" className="link">
                             <li className="sidebarListItem ">
                                 <TrendingUp className="sidebarIcon" />
-                                Alls Analytics
+                                Data graphs
                             </li>
                         </Link>
                     </ul>

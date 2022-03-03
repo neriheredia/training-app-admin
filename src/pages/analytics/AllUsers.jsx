@@ -18,7 +18,7 @@ export default function AllUsersGraph() {
             <Chart
                 title="Total Nutritionists"
                 grid dataKey="Active Users"
-                type={'transactions'}
+                type={'nutritionists'}
             />
             <Chart
                 title="Total Transactions"

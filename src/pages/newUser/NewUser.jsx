@@ -5,12 +5,15 @@ import "./newUser.css";
 import { register } from "../../redux/apiCalls/registerCall/createRegister";
 import { useDispatch } from "react-redux";
 import Swal from 'sweetalert2'
+import { useEffect } from "react";
 
 export default function NewUser() {
     const history = useHistory()
     const [errors, setErrors] = useState({});
 
-    const [newUserForm, setNewUser] = useState({})
+    const [newUserForm, setNewUser] = useState({
+        isAdmin:false
+    })
 
     const dispatch = useDispatch()
 
@@ -26,6 +29,15 @@ export default function NewUser() {
         }
     })
 
+    useEffect(()=>{
+        document.getElementById('newUserSelect').addEventListener('click',(e)=>{
+            console.log(e)
+            e.target.checked=!e.target.checked
+        }
+        )
+        
+    },[])
+
     function handleChange(e){
         e.preventDefault()
 
@@ -34,7 +46,7 @@ export default function NewUser() {
         let field = e.target.name
         let input = e.target.value
 
-        console.log(input)
+        console.log(input, typeof input)
 
         if(field==='password'){ 
             if(!/(?=.*\d).{8,}$/.test(input)) setErrors({...errors, password:"Password must contain at least8 characters and 1 number"})
@@ -51,21 +63,27 @@ export default function NewUser() {
             else setErrors({...errors, [field]:''})
         }
 
-        // if(field==='isAdmin'){
-        //     if(input !=='boolean') setErrors({...errors, isAdmin:"Invalid input type"})
-        //     else setErrors({...errors, [field]:''})
-        // }
+        if(field==='isAdmin'){
+            e.target.checked=!e.target.checked
+                setNewUser({
+                    ...newUserForm,
+                    [field]:!newUserForm.isAdmin
+                })
+            }
 
         if(field==='profile_img'){
             if(!/https?:\/\/.+\.(a?png|gif|p?jpe?g|jfif|pjp|webp|pdf|svg|avif|jxl|bmp|ico|cur|tiff?)$/i.test(input)) setErrors({...errors, profile_img:"The file must be an image"})
             else setErrors({...errors, [field]:''})
         }
 
-            setNewUser({
-            ...newUserForm,
-            [field]:input
-        })
+        if(field!=='isAdmin'){
+                setNewUser({
+                ...newUserForm,
+                [field]:input
+            })
+        }
     }
+    
 
     function handleSubmit(e){
         e.preventDefault()
@@ -81,22 +99,6 @@ export default function NewUser() {
             title: 'There\'s an error in your inputs'
         })
     }
-
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-    //     setError(false);
-    //     try {
-    //         const res = await publicRequest.post("auth/register", {
-    //             username,
-    //             email,
-    //             password,
-    //             isAdmin: box
-    //         });
-    //         res.data && history.push("/users");
-    //     } catch (err) {
-    //         setError(true);
-    //     }
-    // };
 
 
     return (
@@ -133,11 +135,9 @@ export default function NewUser() {
                 <div className="newUserItem">
                     <label>isAdmin</label>
                     <input
-                        className="newUserSelect"
+                        id="newUserSelect"
                         name='isAdmin'
                         type='checkbox'
-                        value={true}
-                        onChange={handleChange}
                     />
                 </div>
                 <button className="newUserButton" type='submit' onClick={handleSubmit}>Create</button>

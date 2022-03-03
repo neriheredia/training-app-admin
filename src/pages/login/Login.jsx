@@ -2,15 +2,23 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { loginUser } from '../../redux/apiCalls/userLoginCall/userLoginCall'
+import { logoutUser } from '../../redux/reducers/userLoginReducer'
 import { useField } from '../../hooks/useField/useField'
+import { useSelector } from 'react-redux'
 
 const Login = () => {
     const username = useField({ type: 'text' })
     const password = useField({ type: 'password' })
     const [user, setUser] = useState({})
 
+    const thisuser = useSelector(state=>state.user.currentUser)
+
     const dispatch = useDispatch()
     const history = useHistory()
+
+    useEffect(()=>{
+        dispatch(logoutUser(thisuser))
+    },[])
 
     useEffect(() => {
         setUser(prev => {

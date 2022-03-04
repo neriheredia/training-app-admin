@@ -63,7 +63,7 @@ export default function ProductList() {
             renderCell: (params) => {
                 return (
                     <div className="productListItem">
-                        <a href={params.row.receipt}>URL</a>
+                        <a href={params.row.receipt} target='_blank' rel='noreferrer'>URL</a>
                     </div>
                 );
             },

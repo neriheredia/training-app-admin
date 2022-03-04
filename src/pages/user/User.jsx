@@ -90,24 +90,41 @@ export default function User() {
         e.preventDefault()
 
         let field = e.target.name
-        let input = e.target.value
+        let input = e.target.value 
 
-        if(field==='password'&&!/(?=.*\d).{8,}$/.test(input)) 
-            setErrors({...errors, password:"Password must contain at least8 characters and 1 number"})
+        if(field==='password'){ 
+            if(!/(?=.*\d).{8,}$/.test(input)) setErrors({...errors, password:"Password must contain at least8 characters and 1 number"})
+            else setErrors({...errors, [field]:''})
+        }
 
-        if(field==='username'&&input.length<5)
-            setErrors({...errors, username:"Username must contain at least 5 characters"})
+        if(field==='username'){
+            if(input.length<5) setErrors({...errors, username:"Username must contain at least 5 characters"})
+            else setErrors({...errors, [field]:''})
+        }
 
-        if(field==='email'&&!/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(input))
-            setErrors({...errors, email:"Please enter a valid email"})
+        if(field==='email'){
+            if(!/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(input)) setErrors({...errors, email:"Please enter a valid email"})
+            else setErrors({...errors, [field]:''})
+        }
 
-        if(field==='profile_img'&&!/https?:\/\/.+\.(a?png|gif|p?jpe?g|jfif|pjp|webp|pdf|svg|avif|jxl|bmp|ico|cur|tiff?)$/i.test(input))
-            setErrors({...errors, profile_img:"The file must be an image"})
+        if(field==='isAdmin'){
+            setNewUser({
+                ...newUserForm,
+                is_admin:!newUserForm.is_admin
+            })
+        }
 
-        setForm({
-            ...userForm,
-            [field]:input
-        })
+        if(field==='profile_img'){
+            if(!/https?:\/\/.+\.(a?png|gif|p?jpe?g|jfif|pjp|webp|pdf|svg|avif|jxl|bmp|ico|cur|tiff?)$/i.test(input)) setErrors({...errors, profile_img:"The file must be an image"})
+            else setErrors({...errors, [field]:''})
+        }
+
+        if(field!=='isAdmin'){
+                setNewUser({
+                ...newUserForm,
+                [field]:input
+            })
+        }
     }
 
     function handleSubmit(e){
@@ -198,6 +215,14 @@ export default function User() {
                             </div>
                             <div className="userUpdateBox">
                                 <label>isAdmin</label>
+                                <select id="newUserSelect" name='isAdmin' defaultValue={false} onChange={handleChange}>
+                                    <option value={true}>
+                                        Yes
+                                    </option>
+                                    <option value={false} >
+                                        No
+                                    </option>
+                                </select>
                                 <input
                                     type="checkbox"
                                     name='is_admin'

@@ -11,9 +11,7 @@ export default function NewUser() {
     const history = useHistory()
     const [errors, setErrors] = useState({});
 
-    const [newUserForm, setNewUser] = useState({
-        isAdmin:false
-    })
+    const [newUserForm, setNewUser] = useState({})
 
     const dispatch = useDispatch()
 
@@ -30,23 +28,14 @@ export default function NewUser() {
     })
 
     useEffect(()=>{
-        document.getElementById('newUserSelect').addEventListener('click',(e)=>{
-            console.log(e)
-            e.target.checked=!e.target.checked
-        }
-        )
-        
-    },[])
+        console.log(newUserForm)
+    })
 
     function handleChange(e){
         e.preventDefault()
 
-        console.log(errors)
-
         let field = e.target.name
-        let input = e.target.value
-
-        console.log(input, typeof input)
+        let input = e.target.value 
 
         if(field==='password'){ 
             if(!/(?=.*\d).{8,}$/.test(input)) setErrors({...errors, password:"Password must contain at least8 characters and 1 number"})
@@ -64,12 +53,11 @@ export default function NewUser() {
         }
 
         if(field==='isAdmin'){
-            e.target.checked=!e.target.checked
-                setNewUser({
-                    ...newUserForm,
-                    [field]:!newUserForm.isAdmin
-                })
-            }
+            setNewUser({
+                ...newUserForm,
+                is_admin:!newUserForm.is_admin
+            })
+        }
 
         if(field==='profile_img'){
             if(!/https?:\/\/.+\.(a?png|gif|p?jpe?g|jfif|pjp|webp|pdf|svg|avif|jxl|bmp|ico|cur|tiff?)$/i.test(input)) setErrors({...errors, profile_img:"The file must be an image"})
@@ -88,7 +76,12 @@ export default function NewUser() {
     function handleSubmit(e){
         e.preventDefault()
         if(!Object.values(errors).find(e=>e!=='')) {
-            register(dispatch, newUserForm)
+            try{
+                register(dispatch, newUserForm)
+            }
+            catch(e){
+                console.log(1)
+            }
             Toast.fire({
                 icon: 'info',
                 title: 'User created'
@@ -133,12 +126,15 @@ export default function NewUser() {
                     />
                 </div>
                 <div className="newUserItem">
-                    <label>isAdmin</label>
-                    <input
-                        id="newUserSelect"
-                        name='isAdmin'
-                        type='checkbox'
-                    />
+                    <label>Is Admin</label>
+                    <select id="newUserSelect" name='isAdmin' defaultValue={false} onChange={handleChange}>
+                        <option value={true}>
+                            Yes
+                        </option>
+                        <option value={false} >
+                            No
+                        </option>
+                    </select>
                 </div>
                 <button className="newUserButton" type='submit' onClick={handleSubmit}>Create</button>
             </form>

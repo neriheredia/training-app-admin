@@ -1,57 +1,219 @@
 .newUser {
-    flex: 4;
-  }
-  
-  .newUserForm {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  
-  .newUserItem {
-    width: 400px;
-    display: flex;
-    flex-direction: column;
-    margin-top: 10px;
-    margin-right: 20px;
-  }
-  
-  .newUserItem > label {
-    margin-bottom: 10px;
-    font-size: 14px;
-    font-weight: 600;
-    color: rgb(151, 150, 150);
-  }
-  
-  .newUserItem > input {
-    height: 20px;
-    padding: 10px;
-    border: 1px solid gray;
-    border-radius: 5px;
-  }
-  
-  .newUserGender > input {
-    margin-top: 15px;
-  }
-  
-  .newUserGender>label{
-      margin: 10px;
-      font-size: 18px;
-      color: #555;
-  }
-  
-  #newUserSelect{
-      height: 40px;
-      border-radius: 5px;
-  }
-  
-  .newUserButton{
-      width: 200px;
-      border: none;
-      background-color: darkblue;
-      color: white;
-      padding: 7px 10px;
-      font-weight: 600;
-      border-radius: 10px;
-      margin-top: 30px;
-      cursor: pointer;
-  }
+  flex: 4;
+  padding: 20px;
+}
+
+*{
+  outline: none;
+}
+
+.newUserTitleContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.newUserAddButton {
+  width: 80px;
+  border: none;
+  padding: 5px;
+  background-color: teal;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+  font-size: 16px;
+}
+
+.newUserContainer {
+  display: flex;
+  margin-top: 20px;
+}
+
+.newUserShow {
+  flex: 1;
+  padding: 20px;
+  -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+}
+
+.newUserUpdate {
+  flex: 3;
+  padding: 20px;
+  -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+  margin-left: 20px;
+}
+
+.newUserShowTop {
+  display: flex;
+  align-items: center;
+}
+
+.newUserShowImg {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.newUserShowTopTitle {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+}
+
+.newUserShownewUsername {
+  font-weight: 600;
+}
+
+.newUserShownewUserTitle {
+  font-weight: 300;
+}
+
+.newUserShowBottom {
+  margin-top: 20px;
+}
+
+.newUserShowTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgb(175, 170, 170);
+}
+
+.newUserShowInfo {
+  display: flex;
+  align-items: center;
+  margin: 20px 0px;
+  color: #444;
+}
+
+.newUserShowIcon {
+  font-size: 16px !important;
+}
+
+.newUserShowInfoTitle {
+  margin-left: 10px;
+}
+
+.newUserUpdateTitle {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.newUserUpdateForm {
+  display: flex;
+  margin-top: 20px;
+  padding: 20px;
+  justify-content: space-between;
+  width: fit-content;
+  gap:100px;
+  box-shadow: 0px 0px 15px -10px rgb(0 0 0 / 75%);
+}
+
+.newUserUpdateItem {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.newUserUpdateItem > label {
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.newUserUpdateInput {
+  border: none;
+  width: 250px;
+  height: 30px;
+  border-bottom: 1px solid gray;
+}
+
+.newUserUpdateRight {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.newUserUpdateUpload {
+  display: flex;
+  align-items: center;
+}
+
+.newUserUpdateImg {
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+  object-fit: cover;
+  margin-right: 20px;
+}
+
+.newUserUpdateIcon {
+  cursor: pointer;
+}
+
+.newUserUpdateButton {
+  border-radius: 5px;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+  background-color: darkblue;
+  color: white;
+  font-weight: 600;
+}
+
+.newUserUpdateBox {
+  display: flex;
+  margin-top: 10px;
+  flex-direction: column;
+}
+
+.newUserUpdateBox label {
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.newUserUpdateBox .newUserUpdateBox {
+  margin-right: 80px;
+  margin-bottom: 20px;
+}
+
+#options{
+  display: flex;
+  gap:10px;
+}
+
+#up,#erase{
+  color: white;
+	border: hidden;
+	border-radius: 5px;
+	padding: 5px 15px;
+	text-decoration: none;
+	font-weight: 600;
+	transition: .3s;
+	box-sizing: content-box;
+	text-align: center;
+	cursor: pointer;
+}
+
+#up{
+  background-color: rgb(46, 70, 148)
+}
+
+#up:hover{
+  background-color: rgb(87, 110, 182);
+}
+
+#erase{
+  background-color: rgb(156, 33, 33);
+}
+
+#erase:hover{
+  background-color: rgb(185, 66, 66);
+}
+
+#selectAdmin{
+  height: 33px;
+  border:0;
+  outline: none;
+  border-bottom: 1px solid gray;
+}

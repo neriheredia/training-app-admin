@@ -108,9 +108,9 @@ export default function User() {
         }
 
         if(field==='isAdmin'){
-            setNewUser({
-                ...newUserForm,
-                is_admin:!newUserForm.is_admin
+            setForm({
+                ...userForm,
+                is_admin:!userForm.is_admin
             })
         }
 
@@ -120,8 +120,8 @@ export default function User() {
         }
 
         if(field!=='isAdmin'){
-                setNewUser({
-                ...newUserForm,
+                setForm({
+                ...userForm,
                 [field]:input
             })
         }
@@ -215,7 +215,7 @@ export default function User() {
                             </div>
                             <div className="userUpdateBox">
                                 <label>isAdmin</label>
-                                <select id="newUserSelect" name='isAdmin' defaultValue={false} onChange={handleChange}>
+                                <select id="selectAdmin" name='isAdmin' defaultValue={false} onChange={handleChange}>
                                     <option value={true}>
                                         Yes
                                     </option>
@@ -223,12 +223,6 @@ export default function User() {
                                         No
                                     </option>
                                 </select>
-                                <input
-                                    type="checkbox"
-                                    name='is_admin'
-                                    className="userUpdateBox"
-                                    onChange={handleChange}
-                                />
                             </div>
                         </div>
                         <div className="userUpdateRight">

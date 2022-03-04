@@ -10,27 +10,31 @@ export default function AllUsersGraph() {
                     title="Total Users"
                     grid dataKey="Active Users"
                     type={'users'}
-                />
+                    table
+                /> 
             </div>
             <div>
                 <Chart
                     title="Total Trainers"
-                    grid dataKey="Active Users"
+                    grid dataKey="Active Trainers"
                     type={'trainers'}
+                    table
                 />
             </div>
             <div>
                 <Chart
                     title="Total Nutritionists"
-                    grid dataKey="Active Users"
+                    grid dataKey="Active Nutritionists"
                     type={'nutritionists'}
+                    table
                 />
             </div>
             <div>
                 <Chart
                     title="Total Transactions"
-                    grid dataKey="Active Users"
+                    grid dataKey="Total Transactions"
                     type={'transactions'}
+                    table
                 />
             </div>
         </div>

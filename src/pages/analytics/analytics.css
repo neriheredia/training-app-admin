@@ -2,14 +2,4 @@
     flex: 15;
     height: 94vh;
     overflow: auto;
-    /* display: flex;
-    flex-wrap: nowrap; */
-}
-
-.analytics>div{
-    width: 50%;
-}
-
-.analytics>div{
-
 }

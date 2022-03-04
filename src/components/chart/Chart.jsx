@@ -11,8 +11,9 @@ import {
 import { useEffect } from "react";
 import { getMonthlyStats } from "../../redux/apiCalls/getMonthlyStats/getMonthlyStats";
 import { useDispatch, useSelector } from 'react-redux'
+import WidgetLg from "../../components/widgetLg/WidgetLg";
 
-export default function Chart({ title, dataKey, grid, type }) {
+export default function Chart({ title, dataKey, grid, type, table }) {
 
     const dispatch = useDispatch()
     const stats = useSelector(state => {
@@ -48,6 +49,7 @@ export default function Chart({ title, dataKey, grid, type }) {
                     {grid && <CartesianGrid stroke="#e0dfdfbe" strokeDasharray="5 5" />}
                 </LineChart>
             </ResponsiveContainer>
+            {table?<WidgetLg type={type}/>:null}
         </div>
     );
 }

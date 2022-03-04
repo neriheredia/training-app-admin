@@ -155,13 +155,13 @@
 
 .userUpdateBox {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 20px;
+  margin-top: 10px;
+  flex-direction: column;
 }
 
 .userUpdateBox label {
-  margin-left: 10px;
+  margin-bottom: 5px;
+  font-size: 14px;
 }
 
 .userUpdateBox .userUpdateBox {
@@ -201,4 +201,12 @@
 
 #erase:hover{
   background-color: rgb(185, 66, 66);
+}
+
+#selectAdmin{
+  height: 33px;
+  border:0;
+  outline: none;
+  border-bottom: 1px solid gray;
+
 }

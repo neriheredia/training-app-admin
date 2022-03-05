@@ -267,6 +267,7 @@ export default function NewUser() {
                             <button className="newUserUpdateButton" onClick={handleSubmit}>Update</button>
                         </div>
                     </form>
+
                 </div>
     );
 }

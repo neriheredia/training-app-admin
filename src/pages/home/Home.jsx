@@ -13,7 +13,7 @@ export default function Home() {
             />
             <div className="homeWidgets">
                 <WidgetSm />
-                <WidgetLg />
+                <WidgetLg type='transactions'/>
             </div>
         </div>
     );

@@ -20,16 +20,15 @@ export default function UserList() {
                 //setLoading(false)
                 setState(false)
             })
-    }, [dispatch, loading, state])
+    }, [state])
 
     console.log(users);
-    // const handleDelete = (id) => {
-    //     setLoading(true)
-    //     deleteUsers(id, dispatch)
-    //         .then(response => {
-    //             setLoading(false)
-    //         })
-    // };
+
+    const sorted = [...users].sort(function(a, b){
+        if(a.id < b.id) { return -1; }
+        if(a.id > b.id) { return 1; }
+        return 0;
+    });
 
     const columns = [
         { field: "id", headerName: "ID", width: 220 },
@@ -72,6 +71,7 @@ export default function UserList() {
             headerName: "Action",
             width: 130,
             renderCell: (params) => {
+                
                 return (
                     <>
                         <Link to={"/user/" + params.row.id}>
@@ -107,7 +107,7 @@ export default function UserList() {
                 ) :
                     (
                         <DataGrid
-                            rows={users}
+                            rows={sorted}
                             disableSelectionOnClick
                             columns={columns}
                             getRowId={row => row.id}
